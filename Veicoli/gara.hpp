@@ -28,6 +28,7 @@ class Gara{
         void partenza();
         void stampaClassifica();
         void aggiungiPartecipante(Veicolo& v);
+        void bubblesort();
         
 };
 
@@ -37,25 +38,9 @@ void Gara::aggiungiPartecipante(Veicolo& v){
     veicoli[n_iscritti++] = &v;
 }
 
-void Gara::controlla(int t){
-    //int tempmax = veicoli[0]->getVelocita();
-    /*
-    int indicemax = 0;
-    //int tempmax = -1;
-
-    for(int i = 1; i < n_iscritti; i++){
-        //estrarre la velocità di ogni veicolo
-        //e verificare chi è più avanti
-        //ricerca se vogliamo trovare solo il massimo
-        //ordinamento se vogliamo la classifica completa
-        if(veicoli[i]->getVelocita() > tempmax){
-            tempmax = veicoli[i]->getVelocita();
-            indicemax = i;
-        }
-    }
-    cout <<"Il veicolo piu' veloce e' " << *veicoli[indicemax] << " e ha velocita' " << tempmax << endl;
-    */
+void Gara::bubblesort(){  
     bool swap = true;
+    
     while(swap){
         swap = false;
         
@@ -68,6 +53,40 @@ void Gara::controlla(int t){
             }
         }
     }
+    
+    /* PROF
+    for(int i=0; i < numeroIscritti; i++) {
+		for(int j=i+1; j < numeroIscritti; j++) {
+			if(*veicoli[i] < *veicoli[j]) {
+				Veicolo *tmp = veicoli[i];
+				veicoli[i] = veicoli[j];
+				veicoli[j] = tmp;
+			}
+		}
+	}
+    */
+}
+
+void Gara::controlla(int t){
+    int tempmax = veicoli[0]->getVelocita();
+    
+    int indicemax = 0;
+    //int tempmax = -1;
+
+    for(int i = 1; i < n_iscritti; i++){
+        //estrarre la velocità di ogni veicolo
+        //e verificare chi è più avanti
+        //ricerca se vogliamo trovare solo il massimo
+        //ordinamento se vogliamo la classifica completa
+        /*
+        if(veicoli[i]->getVelocita() > tempmax){
+            tempmax = veicoli[i]->getVelocita();
+            indicemax = i;
+        }
+        */
+        Gara::bubblesort();
+    }
+    cout <<"Il veicolo piu' veloce e' " << *veicoli[indicemax] << " e ha velocita' " << tempmax << endl;
 }
 
 void Gara::partenza(){ //gara
